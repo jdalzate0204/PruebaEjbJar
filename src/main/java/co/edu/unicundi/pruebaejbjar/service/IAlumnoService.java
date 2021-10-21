@@ -1,6 +1,9 @@
 package co.edu.unicundi.pruebaejbjar.service;
 
 import co.edu.unicundi.pruebaejbjar.entity.Alumno;
+import co.edu.unicundi.pruebaejbjar.exception.BussinessException;
+import co.edu.unicundi.pruebaejbjar.exception.ResourceNotFoundException;
+import java.util.List;
 import javax.ejb.*;
 
 /**
@@ -11,9 +14,9 @@ import javax.ejb.*;
 //@Remote
 @Local
 public interface IAlumnoService {
-    public void listar();
-    public void listarPorId();
+    public List<Alumno> listar();
+    public Alumno listarPorId(Integer id) throws ResourceNotFoundException;
     public void guardar(Alumno obj);
-    public void editar();
-    public void eliminar();
+    public void editar(Alumno obj) throws BussinessException, ResourceNotFoundException;
+    public void eliminar(Integer id) throws ResourceNotFoundException;
 }

@@ -1,10 +1,12 @@
 package co.edu.unicundi.pruebaejbjar.service.impl;
 
 import co.edu.unicundi.pruebaejbjar.entity.Alumno;
+import co.edu.unicundi.pruebaejbjar.exception.BussinessException;
+import co.edu.unicundi.pruebaejbjar.exception.ResourceNotFoundException;
 import co.edu.unicundi.pruebaejbjar.repository.IAlumnoRepo;
-import co.edu.unicundi.pruebaejbjar.repository.impl.AlumnoRepoImpl;
 import javax.ejb.*;
 import co.edu.unicundi.pruebaejbjar.service.IAlumnoService;
+import java.util.List;
 
 /**
  * Nunca se pasa la clase bean al cliente, se pasa la interface nada más
@@ -37,13 +39,17 @@ public class AlumnoServiceImpl implements IAlumnoService {
     public IAlumnoRepo repo;
 
     @Override
-    public void listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Alumno> listar() {
+        return repo.listarTodos();
     }
 
     @Override
-    public void listarPorId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Alumno listarPorId(Integer id) throws ResourceNotFoundException {
+        Alumno alumno = repo.listarPorId(id);
+        if (alumno != null)
+            return alumno;
+        else
+            throw new ResourceNotFoundException("Alumno no encontrado");
     }
 
     @Override
@@ -53,12 +59,26 @@ public class AlumnoServiceImpl implements IAlumnoService {
     }
 
     @Override
-    public void editar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void editar(Alumno obj) throws BussinessException, ResourceNotFoundException {
+        if (obj.getId() != null){
+            Alumno alumno = this.listarPorId(obj.getId());
+            this.repo.editar(obj);
+            
+            //Logica si la cedula no se puede modificar
+            /*if (!obj.getCedula().equals((alumno.getCedula())))
+                throw new BussinessException(("Cedula no se puede modificar"));
+            
+            if (!obj.getCedula().equals((alumno.getCedula())))
+                 obj.setCedula(alumno.getCedula());*/
+            
+            //Logica cedula si modificar (Validar que la cedula no la tenga otra persona y ser diferente a mi propia cedula)
+        } else
+            throw new BussinessException("El id es obligatorio");
     }
 
     @Override
-    public void eliminar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminar(Integer id) throws ResourceNotFoundException {
+        Alumno alumno = this.listarPorId(id);
+        this.repo.eliminar(alumno);
     }    
 }

@@ -12,5 +12,5 @@ public interface ICrud<T, V> {
     public T listarPorId(V id);
     public void guardar(T obj);
     public void editar(T obj);
-    public void eliminar(V id);
+    public void eliminar(T obj);
 }

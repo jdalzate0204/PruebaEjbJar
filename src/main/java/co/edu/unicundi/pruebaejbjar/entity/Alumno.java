@@ -10,9 +10,16 @@ import javax.validation.constraints.*;
  */
 @Entity //Indica que es un objeto persistente a la bbdd
 @Table (name = "alumno") //Indicar que es una tabla (name opcional, schema por defecto publico)
+
+//Consultas JPQL (No se hace la consulta sobre la base de datos, sino en codigo java)
+@NamedQueries({
+    @NamedQuery(name = "Alumno.ListarTodos", query = "SELECT a FROM Alumno a")    
+})
+
 public class Alumno implements Serializable{
     
     @Id //LLave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @NotNull(message = "nombre es obligatorio")

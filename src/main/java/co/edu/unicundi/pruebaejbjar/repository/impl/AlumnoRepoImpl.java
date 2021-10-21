@@ -18,12 +18,13 @@ public class AlumnoRepoImpl implements IAlumnoRepo{
     
     @Override
     public List<Alumno> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Alumno> query = em.createNamedQuery("Alumno.ListarTodos", Alumno.class);
+        return query.getResultList();
     }
 
     @Override
     public Alumno listarPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Alumno.class, id);
     }
 
     @Override
@@ -33,11 +34,11 @@ public class AlumnoRepoImpl implements IAlumnoRepo{
 
     @Override
     public void editar(Alumno obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.em.merge(obj);
     }
 
     @Override
-    public void eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminar(Alumno obj) {
+        this.em.remove(obj);
     }
 }
