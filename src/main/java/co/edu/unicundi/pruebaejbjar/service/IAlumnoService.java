@@ -14,9 +14,9 @@ import javax.ejb.*;
 //@Remote
 @Local
 public interface IAlumnoService {
+    public void guardar(Alumno obj);
     public List<Alumno> listar();
     public Alumno listarPorId(Integer id) throws ResourceNotFoundException;
-    public void guardar(Alumno obj);
     public void editar(Alumno obj) throws BussinessException, ResourceNotFoundException;
     public void eliminar(Integer id) throws ResourceNotFoundException;
 }
