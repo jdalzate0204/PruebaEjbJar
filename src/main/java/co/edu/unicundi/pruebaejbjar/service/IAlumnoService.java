@@ -3,6 +3,7 @@ package co.edu.unicundi.pruebaejbjar.service;
 import co.edu.unicundi.pruebaejbjar.entity.Alumno;
 import co.edu.unicundi.pruebaejbjar.exception.BussinessException;
 import co.edu.unicundi.pruebaejbjar.exception.ResourceNotFoundException;
+import co.edu.unicundi.pruebaejbjar.view.VistaAutorLibro;
 import java.util.List;
 import javax.ejb.*;
 

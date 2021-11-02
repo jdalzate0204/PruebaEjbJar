@@ -3,6 +3,7 @@ package co.edu.unicundi.pruebaejbjar.repository.impl;
 import co.edu.unicundi.pruebaejbjar.entity.Alumno;
 import co.edu.unicundi.pruebaejbjar.entity.Autor;
 import co.edu.unicundi.pruebaejbjar.repository.IAutorRepo;
+import co.edu.unicundi.pruebaejbjar.view.VistaAutorLibro;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,6 +44,12 @@ public class AutorRepoImpl implements IAutorRepo{
     @Override
     public void eliminar(Autor obj) {
         this.em.remove(obj);
+    }
+
+    @Override
+    public List<VistaAutorLibro> obtener() {
+        TypedQuery<VistaAutorLibro> query = em.createNamedQuery("VistaAutor.Listar", VistaAutorLibro.class);
+        return query.getResultList();
     }
     
 }

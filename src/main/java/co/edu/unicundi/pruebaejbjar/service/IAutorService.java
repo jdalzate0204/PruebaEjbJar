@@ -9,6 +9,7 @@ import co.edu.unicundi.pruebaejbjar.entity.Alumno;
 import co.edu.unicundi.pruebaejbjar.entity.Autor;
 import co.edu.unicundi.pruebaejbjar.exception.BussinessException;
 import co.edu.unicundi.pruebaejbjar.exception.ResourceNotFoundException;
+import co.edu.unicundi.pruebaejbjar.view.VistaAutorLibro;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -23,4 +24,5 @@ public interface IAutorService {
     public Autor listarPorId(Integer id);
     public void editar(Autor obj);
     public void eliminar(Integer id);
+    public List<VistaAutorLibro> obtener();
 }
