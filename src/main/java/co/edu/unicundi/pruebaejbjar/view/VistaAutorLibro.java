@@ -1,5 +1,6 @@
 package co.edu.unicundi.pruebaejbjar.view;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
@@ -8,51 +9,41 @@ import jdk.nashorn.internal.ir.annotations.Immutable;
  * @author acer
  */
 @Entity
-@Table(name = "vista_autor_libro")
 @Immutable
+@Table(name = "vista_autor_libro")
 
 @NamedQueries({
-    @NamedQuery(name = "VistaAutor.Listar", 
-            query = "SELECT a.id, a.nombre, a.edad, a.identificacion, "
-                    + "COUNT(l.id_autor) AS cantidad_libros, "
-                    + "MAX(l.no_paginas) AS libro_mas_paginas, "
-                    + "(SELECT b.nombre FROM Libro b WHERE b.no_paginas = "
-                    + "(SELECT MAX(b.no_paginas) from Libro b)) AS nombre_libro_mas_paginas "
-                    + "FROM Autor a, Libro l GROUP BY a.id") 
+    @NamedQuery(name = "VistaAutor.Listar", query = "SELECT v FROM VistaAutorLibro v")
 })
 
-public class VistaAutorLibro {
+public class VistaAutorLibro implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(name = "id_autor", nullable = false)
-    private Integer idAutor;
-    
-    @Column(name = "nombre", nullable = false, length = 30)
+    @Column(name = "nombre", insertable = false, updatable = false, length = 30)
     private String nombre;
     
-    @Column(name = "edad", nullable = false)
+    @Column(name = "edad", insertable = false, updatable = false)
     private Integer edad;
     
-    @Column(name = "identificacion", nullable = false, length = 10, unique = true)
+    @Column(name = "identificacion", insertable = false, updatable = false, length = 10, unique = true)
     private String identificacion;
     
-    @Column(name = "cantidad_libros", nullable = false)
+    @Column(name = "cantidad_libros", insertable = false, updatable = false)
     private Integer cantidadLibros;
     
-    @Column(name = "libro_mas_paginas", nullable = false)
+    @Column(name = "libro_mas_paginas", insertable = false, updatable = false)
     private Integer libroMasPaginas;
     
-    @Column(name = "nombre_libro_mas_paginas", nullable = false, length = 30)
+    @Column(name = "nombre_libro_mas_paginas", insertable = false, updatable = false, length = 30)
     private String nombreLibroMasPaginas;
 
     public VistaAutorLibro() {
     }
 
-    public VistaAutorLibro(Integer idAutor, String nombre, Integer edad, String identificacion, Integer cantidadLibros, Integer libroMasPaginas, String nombreLibroMasPaginas) {
-        this.idAutor = idAutor;
+    public VistaAutorLibro(String nombre, Integer edad, String identificacion, Integer cantidadLibros, Integer libroMasPaginas, String nombreLibroMasPaginas) {
         this.nombre = nombre;
         this.edad = edad;
         this.identificacion = identificacion;
@@ -67,14 +58,6 @@ public class VistaAutorLibro {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getIdAutor() {
-        return idAutor;
-    }
-
-    public void setIdAutor(Integer idAutor) {
-        this.idAutor = idAutor;
     }
 
     public String getNombre() {

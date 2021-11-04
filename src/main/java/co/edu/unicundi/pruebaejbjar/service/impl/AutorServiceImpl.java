@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.unicundi.pruebaejbjar.service.impl;
 
 import co.edu.unicundi.pruebaejbjar.entity.Autor;
@@ -30,7 +25,12 @@ public class AutorServiceImpl implements IAutorService{
 
     @Override
     public List<Autor> listar() {
-        return repo.listarTodos();
+        List<Autor> listaAutor = repo.listarTodos();
+        
+        for (Autor a: listaAutor)
+            a.getLibro().clear();
+        
+        return listaAutor;
     }
 
     @Override

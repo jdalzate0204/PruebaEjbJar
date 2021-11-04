@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table (name = "autor")
 
 @NamedQueries({
-    @NamedQuery(name = "Autor.ListarTodos", query = "SELECT a FROM Autor a")    
+    @NamedQuery(name = "Autor.ListarTodos", query = "SELECT a FROM Autor a"),    
+    @NamedQuery(name = "Autor.ListarTodosSinLibro", query = "SELECT a.id, a.identificacion, a.nombre, a.apellido, a.edad FROM Autor a")
 })
 public class Autor implements Serializable{
     @Id //LLave primaria

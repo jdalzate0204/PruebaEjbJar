@@ -28,6 +28,7 @@ public class AutorRepoImpl implements IAutorRepo{
     @Override
     public List<Autor> listarTodos() {
         TypedQuery<Autor> query = em.createNamedQuery("Autor.ListarTodos", Autor.class);
+        //TypedQuery<Autor> query = em.createNamedQuery("Autor.ListarTodosSinLibro", Autor.class);
         return query.getResultList();
     }
 
